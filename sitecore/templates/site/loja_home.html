@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ loja.nome }}</title>
+</head>
+<body>
+    <h1>Bem-vindo à {{ loja.nome }}</h1>
+    <p>Subdomínio: {{ request.get_host }}</p>
+    <p>URL: {{ request.scheme }}://{{ request.get_host }}{{ request.path }}</p>
+
+    <h2>Produtos Disponíveis</h2>
+    {% if produtos %}
+        <ul>
+            {% for produto in produtos %}
+                <li>{{ produto.nome }} - R$ {{ produto.preco }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Não há produtos cadastrados nesta loja.</p>
+    {% endif %}
+</body>
+</html>

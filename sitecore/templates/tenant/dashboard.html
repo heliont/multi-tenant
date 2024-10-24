@@ -1,0 +1,33 @@
+<!-- tenant/dashboard.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Tenant</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+
+    {% if request.user.is_superuser %}
+        <h2>Todas as Lojas</h2>
+        {% if lojas %}
+            <ul>
+                {% for loja in lojas %}
+                    <li><a target="_blank" href="{{ request.scheme }}://{{ loja.tenant.subdominio }}.booksite.com.br:{{request.get_port}}">{{ loja.nome }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nenhuma loja cadastrada.</p>
+        {% endif %}
+    {% else %}
+        <h2>Minha Loja</h2>
+        {% if loja %}
+            <p>{{ loja.nome }}</p>
+        {% else %}
+            <p>Você não tem uma loja cadastrada.</p>
+        {% endif %}
+    {% endif %}
+    
+</body>
+</html>
